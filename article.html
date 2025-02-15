@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APP测试流程梳理</title>
+    <!-- 引入marked.js库 -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+    <div id="markdown-content"></div>
+
+    <script>
+        // 加载Markdown文件
+        fetch('APP test process review.md')
+            .then(response => response.text())
+            .then(text => {
+                // 使用marked.js将Markdown转换为HTML
+                const htmlContent = marked.parse(text);
+                // 将生成的HTML插入到页面中
+                document.getElementById('markdown-content').innerHTML = htmlContent;
+            })
+            .catch(error => console.error('Error loading Markdown file:', error));
+    </script>
+</body>
+</html>
