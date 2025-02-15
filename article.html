@@ -1,26 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>APP测试流程梳理</title>
-    <!-- 引入marked.js库 -->
+    <title>Markdown 文件解析</title>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        #content { border: 1px solid #ddd; padding: 20px; }
+    </style>
 </head>
 <body>
-    <div id="markdown-content"></div>
-
     <script>
-        // 加载Markdown文件
-        fetch('APP test process review.md')
+        // 指定 Markdown 文件
+        const markdownFile = "APP_test_process_review.md";
+
+        // 获取 Markdown 文件内容并渲染
+        fetch(markdownFile)
             .then(response => response.text())
-            .then(text => {
-                // 使用marked.js将Markdown转换为HTML
-                const htmlContent = marked.parse(text);
-                // 将生成的HTML插入到页面中
-                document.getElementById('markdown-content').innerHTML = htmlContent;
+            .then(md => {
+                document.getElementById("content").innerHTML = marked.parse(md);
             })
-            .catch(error => console.error('Error loading Markdown file:', error));
+            .catch(error => {
+                document.getElementById("content").innerHTML = "<p style='color:red;'>加载 Markdown 失败！</p>";
+                console.error("Markdown 加载错误:", error);
+            });
     </script>
 </body>
 </html>
